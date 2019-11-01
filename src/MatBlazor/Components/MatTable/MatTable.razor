@@ -14,6 +14,12 @@
 {
     <MatTextField class="mdc-table-filter" OnInput="@((e) => OnInput(e))" Placeholder="@SearchTermFieldPlaceHolder" Label="@SearchTermFieldLabel" Value="@SearchTerm" Icon="filter_list"></MatTextField>
 }
+
+@if (ShowPagingInHeader)
+{
+    <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="false" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
+}
+
 <CascadingValue Value="@this">
     <table class="@ClassMapper.Class" style="@Style" @ref="Ref" @attributes="Attributes" Id="@Id">
         <thead>
@@ -53,6 +59,8 @@
                 </MatSelect>
             </div>
 
+            <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="true" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
+
             <div class="mdc-paginator-range-actions">
                 <span class="mdc-paginator-range-label">Page @CurrentPage of @TotalPages</span>
                 <div class="mdc-paginator-range-buttons">
@@ -75,6 +83,17 @@
 
 @code{
 
+    void UpdatePaging (string value)
+    {
+        PageSize = Convert.ToInt32(value);
+        CurrentPage = 1;
+        TotalPages = Math.Max(1, (int)Math.Ceiling(Items.Count() / (decimal)PageSize));
+        EndPage = TotalPages;
+        StartPage = 1;
+        SetPageSize(PageDirection.Next);
+        UpdateList(1).GetAwaiter();
+    }
+
     protected string PageSizeStr
     {
         get => PageSize.ToString();
@@ -87,6 +106,7 @@
             StartPage = 1;
             SetPageSize(PageDirection.Next);
             UpdateList(1).GetAwaiter();
+            UpdatePaging(value);
         }
     }
 
