@@ -43,7 +43,9 @@
 
 @if (@ShowPaging)
 {
-    <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="true" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
+    <!-- <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="true" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) /> -->
+    <TablePaginator UpdatePaging="@UpdatePaging" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" ShowPagingControls="true" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
+    //  ((string str) => this.PageSizeStr = str)
 }
 
 @code{
