@@ -13,8 +13,9 @@
                 Items per page:
 
                 <!-- <MatSelect @bind-Value="@PageSizeStr" OnInput="(() => UpdatePaging.InvokeAsync(PageSizeStr))"> -->
+                @*<MatSelect Value="@PageSizeStr" ValueChanged="UpdatePaging">
+                    OnInput="(async () => await UpdatePaging.InvokeAsync(PageSizeStr))"*@
                 <MatSelect Value="@PageSizeStr" ValueChanged="UpdatePaging">
-                    @*OnInput="(async () => await UpdatePaging.InvokeAsync(PageSizeStr))"*@
                     @if (PageSizes != null)
                     {
                         foreach (var item in PageSizes)

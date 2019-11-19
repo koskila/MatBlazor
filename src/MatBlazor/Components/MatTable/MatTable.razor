@@ -17,7 +17,7 @@
 
 @if (ShowPagingInHeader)
 {
-    <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="false" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
+    <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="false" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
 }
 
 <CascadingValue Value="@this">
@@ -44,13 +44,13 @@
 @if (@ShowPaging)
 {
     <!-- <TablePaginator UpdatePaging="UpdatePaging" ShowPagingControls="true" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) /> -->
-    <TablePaginator UpdatePaging="@UpdatePaging" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" ShowPagingControls="true" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
     //  ((string str) => this.PageSizeStr = str)
+    <TablePaginator UpdatePaging="@UpdatePaging" PageSizes="@PageSizes" PageSizeStr="@PageSizeStr" ShowPagingControls="true" StartPage="@StartPage" EndPage="@EndPage" TotalPages="@TotalPages" CurrentPage="@CurrentPage" ClickFirst=@(async () => NavigateToPage(PageDirection.First)) ClickNext=@(async () => NavigateToPage(PageDirection.Next)) ClickPrevious=@(async () => NavigateToPage(PageDirection.Previous)) ClickLast=@(async () => NavigateToPage(PageDirection.Last)) />
 }
 
 @code{
 
-    void UpdatePaging (string value)
+    void UpdatePaging(string value)
     {
         PageSize = Convert.ToInt32(value);
         CurrentPage = 1;
